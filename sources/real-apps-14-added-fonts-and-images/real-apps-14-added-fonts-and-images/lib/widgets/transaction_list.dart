@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../models/transaction.dart';
-
 import 'package:intl/intl.dart';
+
+import '../models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
@@ -11,25 +11,23 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 400,
+      height: 300,
       child: transactions.isEmpty
           ? Column(
               children: <Widget>[
                 Text(
-                  'No Transactions added yet!',
+                  'No transactions added yet!',
                   style: Theme.of(context).textTheme.title,
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 Container(
-                  height: 200,
-                  child: Image.asset(
-                    'assets/images/waiting.png',
-                    fit: BoxFit
-                        .cover, //box fit needs something to take the height
-                  ),
-                ),
+                    height: 200,
+                    child: Image.asset(
+                      'assets/images/waiting.png',
+                      fit: BoxFit.cover,
+                    )),
               ],
             )
           : ListView.builder(
@@ -44,19 +42,17 @@ class TransactionList extends StatelessWidget {
                         ),
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: Colors.purple,
+                            color: Theme.of(context).primaryColor,
                             width: 2,
                           ),
                         ),
-                        padding: EdgeInsets.all(
-                          10,
-                        ),
+                        padding: EdgeInsets.all(10),
                         child: Text(
-                          'R\$ ${transactions[index].amount.toStringAsFixed(2)}',
+                          '\$${transactions[index].amount.toStringAsFixed(2)}',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
-                            color: Colors.purple,
+                            color: Theme.of(context).primaryColor,
                           ),
                         ),
                       ),
@@ -65,22 +61,16 @@ class TransactionList extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             transactions[index].title,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 25,
-                              color: Theme.of(context).primaryColor,
-                            ),
+                            style: Theme.of(context).textTheme.title,
                           ),
                           Text(
-                            DateFormat().format(transactions[index].date),
+                            DateFormat.yMMMd().format(transactions[index].date),
                             style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
                               color: Colors.grey,
                             ),
                           ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 );
